@@ -111,14 +111,19 @@ def gt_loader(path):
 
 def img_loader(path, mode="passive", height=2160, width=3840):
     img=None
+
+    #print(path)
     try:
         if path.endswith("raw"):
             img = np.fromfile(open(path, 'rb'), dtype=np.uint8).reshape(height, width, 3 ) if mode=="passive" else \
                   np.fromfile(open(path, 'rb'), dtype=np.uint8).reshape(height, width, 1)
         else:
-            img = cv2.imread(path, -1)
+            #img = cv2.imread(path, -1)
+            img = cv2.imread(path)
     except:
         print('Cannot open input image: '+ path)
+
+    #print(img.shape)
     return img
 
 

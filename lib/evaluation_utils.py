@@ -6,6 +6,8 @@ from tqdm import tqdm
 import os
 import time
 
+import pdb
+
 def soft_edge_error(pred, gt, radius=1):
     abs_diff=[]
     for i in range(-radius, radius + 1):
@@ -63,6 +65,8 @@ def inference(net, cuda, height=1536, width=2048, num_samples=200000, num_out=1)
     return res
 
 def predict(net, cuda, data, superes_factor=1., compute_entropy=False):
+
+    #pdb.set_trace()
     output = {}
     left = data['left'].to(device=cuda)
     right = data['right'].to(device=cuda)
@@ -131,9 +135,9 @@ def validation(opt, net, cuda, data, num_gen_test=10, num_write_test=5, save_img
         test_data = data[gen_idx]
 
         # Inference
-        start = time.clock()
+        start = time.perf_counter()
         output = predict(net, cuda, test_data, opt.superes_factor, opt.differential_entropy)
-        elapsed = time.clock() - start
+        elapsed = time.perf_counter() - start
 
         disp = output['pred_disp']
         gt_disp = to_numpy(test_data['gt_disp'])

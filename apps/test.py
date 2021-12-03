@@ -11,6 +11,8 @@ from lib.data import Loader
 from lib.model import *
 from lib.evaluation_utils import *
 
+import pdb
+
 # get options
 opt = BaseOptions().parse()
 
@@ -19,6 +21,8 @@ def test(opt):
     cuda = torch.device('cuda:%d' % opt.gpu_id)
 
     test_dataset = Loader(opt, phase='test')
+
+    #pdb.set_trace()
 
     test_data_loader = DataLoader(test_dataset,
                                    batch_size=1, shuffle=False,

@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 # args
 mode=passive
@@ -13,7 +13,7 @@ backbone="PSMNet"
 
 # path
 results_path=./output/$dataset/$setup/$mode/$name
-checkpoints_path=./checkpoints/UnrealStereo4K/stereo/passive/$backbone/ckpt
+checkpoints_path=/shared/pretrained-smd/psm-smd/ckpt
 
 # filenames
 testing_file=./filenames/test.txt
@@ -30,7 +30,7 @@ extras="--pin_memory"
 
 # datasets
 if [ $dataset == "UnrealStereo4K" ];then
-    dataroot=/media/Storage/Datasets/UnrealStereo4K
+    dataroot=/shared/data/unrealstereo4k/
     aspect_ratio=0.25
 
 elif [ $dataset == "KITTI" ];then
@@ -38,7 +38,7 @@ elif [ $dataset == "KITTI" ];then
     aspect_ratio=1.
 fi
 
-python apps/test.py --dataroot $dataroot \
+python3 apps/test.py --dataroot $dataroot \
                     --testing_file $testing_file \
                     --results_path $results_path \
                     --mode $mode \
